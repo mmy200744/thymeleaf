@@ -15,7 +15,7 @@
 <!-- 헤더 삽입 -->
 <header th:replace="~{fragments/common :: header}">헤더 영역</header>
 
-<table border="1">
+<table border="1" th:unless="${#lists.isEmpty(mentors)}">
     <thead>
     <tr>
         <th>번호</th>
@@ -28,13 +28,22 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${#lists.isEmpty(mentors)}">
-        <td colspan="7">등록된 멘토가 없습니다.</td>
-    </tr>
+    <div th:if="${#lists.isEmpty(mentors)}">
+        <p>등록된 멘토가 없습니다.</p>
+        <a th:href="@{/mentor/new}">첫 멘토 등록하기</a>
+    </div>
 
     <tr th:each="mentor : ${mentors}">
         <td th:text="${mentor.id}"></td>
         <td th:text="${mentor.name}"></td>
+        <td>
+            <span th:switch="${mentor.speciality}">
+                <span th:case="백엔드">💻백엔드</span>
+                <span th:case="프런트엔드">프런트엔드</span>
+                <span th:case="풀스택">풀스택</span>
+                <span th:case="*" th:text="${mentor.speciality}">기타</span>
+            </span>
+        </td>
         <td th:text="${mentor.speciality}"></td>
         <td th:text="${mentor.email ?: '없음'}"></td>
         <td th:text="${#lists.size(mentor.mentees)}"></td>
