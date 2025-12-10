@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 헤더 프래그먼트 -->
+<header th:fragment="header">
+    <nav>
+        <a th:href="@{/}">홈</a>
+        <a th:href="@{/mentor/list}">멘토 관리</a>
+        <a th:href="@{/mentee/list}">멘티 관리</a>
+    </nav>
+    <hr>
+</header>
+
+<!-- 푸터 프래그먼트 -->
+<footer th:fragment="footer">
+    <hr>
+    <p>2025, 멘토-멘티 관리 시스템</p>
+</footer>
+
+<!-- 패러미터를 받는 프래그먼트 -->
+<head th:fragment="htmlHead(title)">
+<!-- 프래그먼트명(패러미터) -->
+    <meta charset="UTF-8">
+    <title th:text="${title}">기본 제목</title>
+<!--https://getbootstrap.com/-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <style>
+        @font-face {
+            @font-face {
+                font-family: 'GMarketSans';
+                src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+                font-weight: 300;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'GMarketSans';
+                src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+                font-weight: 500;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'GMarketSans';
+                src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+                font-weight: 700;
+                font-display: swap;
+            }
+        }
+    </style>
+<!--    favicon -> file 경로 -->
+<!--    og tag -> file 경로 -->
+<!-- google Analytics -->
+<!-- SED(Search Engine Optimization) -->
+</head>
+
+<!-- 사이드바 프래그먼트 -->
+<aside th:fragment="mentorCard(mentor)">
+    <div>
+        <h3 th:text="${mentor.name}"></h3>
+        <p th:text="|전문분야: ${mentor.speciality}|"></p>
+        <p th:text="|이메일: ${mentor.email}|"></p>
+    </div>
+</aside>

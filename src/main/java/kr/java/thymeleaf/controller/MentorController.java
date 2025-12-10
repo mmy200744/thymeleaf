@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 
@@ -23,5 +25,19 @@ public class MentorController {
         model.addAttribute("currentTime", LocalDateTime.now());
 
         return "syntax/basic"; // resources/templates/syntax/basic.html안에 들어가게 됨
+    }
+
+    //http://localhost:8080/mentor/list 로 연결거임
+    @GetMapping("/mentor/list")
+    public String mentorList(Model model) {
+        model.addAttribute("mentors", mentorService.findAllWithMentees());
+        model.addAttribute("pageTitle", "멘토 관리 시스템");
+        return "mentor/list";
+    }
+
+    @GetMapping("/mentor/{id}")
+    @ResponseBody // -> JSON return
+        public Mentor mentorDetail(Model model, @PathVariable Long id) {
+        return mentorService.findByIdWithMentees(id);
     }
 }
