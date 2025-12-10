@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: 251210_thymeleaf
+  # 프로파일 활성화
+  profiles:
+    active: dev
+# DB 설정 (dev에서 상세히)
+
+
+# View Resolver & Template Engine
+  thymeleaf:
+    # 실제 서비스에서는 반복적으로 호출되는 thymeleaf에 대해서 결과물을 임시저장
+    # 해당 결과물을 바로 return -> 개발 과정에는 off(false)
+    cache: false
+  # prefix: classpath:templates/
+    # suffix : .html
+    # 기본값으로 충분
