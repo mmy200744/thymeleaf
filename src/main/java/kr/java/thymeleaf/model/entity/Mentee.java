@@ -22,6 +22,6 @@ public class Mentee extends BaseEntity{
     
     //다대일
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "mento_id") //FK 지정
-    private Mento mento;
+    @JoinColumn(name = "mentor_id") //FK 지정
+    private Mentor mentor;
 }

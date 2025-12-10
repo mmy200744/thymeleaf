@@ -1,7 +1,6 @@
 package kr.java.thymeleaf.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "MENTO")
+@Table(name = "MENTOR")
 @Getter @Setter
 @NoArgsConstructor
-public class Mento extends BaseEntity{
+public class Mentor extends BaseEntity{
     private String name;
     private String speciality;
     @Column(unique = true)
@@ -23,7 +22,7 @@ public class Mento extends BaseEntity{
     // -> 이 사람이 작성한 글, 댓글, 여러 통계 지표들을 (개인정보 삭제에 따른) 손실 없이 관리할 수 있음
 
     //setter로 하나씩 넣는게 귀찮아서 넣는 생성자
-    public Mento(String name, String speciality, String email) {
+    public Mentor(String name, String speciality, String email) {
         this.name = name;
         this.speciality = speciality;
         this.email = email;
