@@ -1,19 +1,22 @@
 server:
   port: 8080
+
 spring:
   application:
     name: 251210_thymeleaf
-  # 프로파일 활성화
-  profiles:
-    active: dev
-# DB 설정 (dev에서 상세히)
 
-
-# View Resolver & Template Engine
   thymeleaf:
-    # 실제 서비스에서는 반복적으로 호출되는 thymeleaf에 대해서 결과물을 임시저장
-    # 해당 결과물을 바로 return -> 개발 과정에는 off(false)
-    cache: false
-  # prefix: classpath:templates/
-    # suffix : .html
-    # 기본값으로 충분
+    cache: false   # 개발 중에는 false
+
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+# 프로필은 여기서 안 박아도 됨 (로컬에서만 dev 쓰고 싶으면 넣어도 되긴 함)
+# profiles:
+#   active: dev
