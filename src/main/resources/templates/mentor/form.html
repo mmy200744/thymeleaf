@@ -1,62 +1,60 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/common :: htmlHead('멘토 등록')}">
-    <title></title>
+    <title>멘토 관리</title>
 </head>
 <body>
-    <header th:replace="~{fragments/common :: header}"></header>
+<header th:replace="~{fragments/common :: header}"></header>
 
-    <main>
-        <h1>멘토 등록</h1>
+<main>
+    <h1>멘토 등록/수정</h1>
 
-        <form
-        th:action="@{/mentor/new}"
-        th:method="post"
-        th:object="${mentorForm}"
-        >
-            <div>
-            <!-- 1. input을 감싸거나 2. for ->id -->
-                <label for="name">이름</label>
-<!--                알아서 ID/name -> field -->
-                <input th:field="*{name}" placeholder="이름을 입력하세요">
+    <form
+            th:action="${mentorForm.id == null} ? @{/mentor/new} : @{/mentor/{id}/edit(id=${mentorForm.id})}"
+            th:method="post"
+            th:object="${mentorForm}"
+    >
+        <input type="hidden" th:field="*{id}" />
 
-                <span th:if="${#fields.hasErrors('name')}"
-                      th:errors="*{name}"></span>
-            </div>
+        <div>
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="이름을 입력하세요">
 
-            <div>
-                <label for="speciality">전문 분야</label>
-                <select th:field="*{name}">
-                    <option
-                            th:each="sp : ${speciality}"
-                            th:value="${sp}"
-                            th:text="${sp}"
-                    ></option>
-                </select>
+            <span class="error" th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">이름 오류</span>
+        </div>
 
-                <span th:if="${#fields.hasErrors('specialty')}"
-                      th:errors="*{specialty}"></span>
-            </div>
+        <div>
+            <label for="specialty">전문 분야</label>
 
-            <div>
-                <label for="email">이메일</label>
-                <!-- 알아서 ID/name -> field -->
-                <input type="email" th:field="*{email}" placeholder="email@example.com">
+            <select id="specialty" th:field="*{specialty}">
+                <option value="">분야를 선택하세요</option>
+                <option
+                        th:each="sp : ${specialties}"
+                        th:value="${sp}"
+                        th:text="${sp}"
+                ></option>
+            </select>
 
-                <span th:if="${#fields.hasErrors('email')}"
-                      th:errors="*{email}"></span>
-            </div>
+            <span class="error" th:if="${#fields.hasErrors('specialty')}"
+                  th:errors="*{specialty}">분야 오류</span>
+        </div>
 
-            <div>
-                <!--                <button type="submit"></button>-->
-                <!--                <input type="button">-->
-                <button th:text="등록">
-                </button>
-                <a th:href="@{/mentor/list}">취소</a>
-            </div>
-        </form>
-    </main>
+        <div>
+            <label for="email">이메일</label>
+            <input type="email" id="email" th:field="*{email}" placeholder="email@example.com">
 
-    <footer th:replace="~{fragments/common :: footer}"></footer>
+            <span class="error" th:if="${#fields.hasErrors('email')}"
+                  th:errors="*{email}">이메일 오류</span>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <button type="submit" th:text="${mentorForm.id == null} ? '등록' : '수정'">등록</button>
+            <a th:href="@{/mentor/list}">취소</a>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragments/common :: footer}"></footer>
 </body>
 </html>

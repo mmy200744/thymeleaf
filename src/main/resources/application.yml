@@ -5,8 +5,12 @@ spring:
   application:
     name: 251210_thymeleaf
 
+  # 핵심: dev 프로필을 활성화하여 application-dev.yml을 읽어오도록 설정
+  profiles:
+    active: dev
+
   thymeleaf:
-    cache: false   # 개발 중에는 false
+    cache: false
 
   jpa:
     hibernate:
@@ -16,7 +20,3 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
-# 프로필은 여기서 안 박아도 됨 (로컬에서만 dev 쓰고 싶으면 넣어도 되긴 함)
-# profiles:
-#   active: dev
